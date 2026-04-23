@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Grace Laundry Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0a1f44;
+            --orange: #ff6b00;
+            --gold: #ffd700;
+            --green: #25D366;
+            --light: #f5f7ff;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--light);
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            background: var(--navy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--gold);
+            font-size: 20px;
+            letter-spacing: 1px;
+            padding: 12px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-family: 'Nunito', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 14px 10px;
+            cursor: pointer;
+            transition: color 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-links button.active,
+        .nav-links button:hover {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* ===== PAGES ===== */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* ===== HOME PAGE ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a6b 60%, #0d2d55 100%);
+            color: #fff;
+            padding: 50px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 200px; height: 200px;
+            background: var(--gold);
+            opacity: 0.06;
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; left: -30px;
+            width: 150px; height: 150px;
+            background: var(--orange);
+            opacity: 0.08;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 38px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 6px;
+        }
+
+        .hero .tagline {
+            font-size: 15px;
+            color: #aac4ff;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .hero .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Media Gallery */
+        .section {
+            padding: 28px 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: var(--navy);
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid var(--orange);
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .media-grid .wide {
+            grid-column: 1 / -1;
+        }
+
+        .media-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            background: #ddd;
+            position: relative;
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .media-item.wide img {
+            height: 220px;
+        }
+
+        .media-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .media-item video {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .video-label {
+            position: absolute;
+            top: 10px; left: 10px;
+            background: var(--orange);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        /* Services strip */
+        .services-strip {
+            background: var(--navy);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 0 16px 20px;
+            max-width: 668px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-strip h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--gold);
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .service-tag {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .service-tag .icon { font-size: 16px; }
+
+        /* Prices section */
+        .price-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--orange);
+        }
+
+        .price-card .name { font-weight: 700; color: #333; }
+        .price-card .price {
+            font-weight: 800;
+            color: var(--navy);
+            font-size: 17px;
+        }
+
+        /* CTA */
+        .cta-bar {
+            background: linear-gradient(135deg, var(--orange), #e65c00);
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            margin: 0 16px 30px;
+            max-width: 668px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-bar h3 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .cta-bar .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+
+        .btn-white { background: #fff; color: var(--orange); }
+        .btn-navy { background: var(--navy); color: #fff; }
+        .btn-green { background: var(--green); color: #fff; }
+        .btn-orange { background: var(--orange); color: #fff; }
+        .btn-full { width: 100%; margin-top: 10px; }
+        .btn-gold { background: var(--gold); color: var(--navy); }
+
+        /* ===== ORDER PAGE ===== */
+        .order-card {
+            background: var(--white);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .order-card select, .order-card input[type="number"] {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .order-card select:focus, .order-card input:focus {
+            border-color: var(--navy);
+        }
+
+        .order-card select { flex: 2; min-width: 150px; }
+        .order-card input[type="number"] { flex: 1; min-width: 75px; }
+
+        .item-total {
+            flex: 1;
+            min-width: 80px;
+            font-weight: 800;
+            color: var(--navy);
+            text-align: right;
+            font-size: 15px;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .add-item-btn {
+            width: 100%;
+            padding: 13px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px dashed #66bb6a;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            margin: 8px 0;
+            transition: background 0.2s;
+        }
+
+        .add-item-btn:hover { background: #c8e6c9; }
+
+        .pickup-box {
+            background: var(--white);
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .pickup-box:has(input:checked) { border-color: var(--navy); }
+
+        .pickup-box input[type="checkbox"] { width: 22px; height: 22px; cursor: pointer; accent-color: var(--navy); }
+        .pickup-box label { flex: 1; cursor: pointer; }
+        .pickup-price { font-weight: 800; color: var(--navy); font-size: 18px; }
+
+        .total-box {
+            background: var(--navy);
+            color: #fff;
+            padding: 24px;
+            border-radius: 14px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .total-box h3 { font-size: 16px; color: #aac4ff; margin-bottom: 4px; }
+        .grand-total { font-family: 'Bebas Neue', sans-serif; font-size: 46px; color: var(--gold); letter-spacing: 2px; }
+        .breakdown { margin-top: 10px; font-size: 13px; color: #aac4ff; }
+
+        .form-box {
+            background: var(--white);
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+
+        .form-box h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--navy);
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        .form-box input {
+            width: 100%;
+            padding: 13px 16px;
+            margin: 7px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-box input:focus { border-color: var(--navy); }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--orange), #e65c00);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 15px rgba(255,107,0,0.4);
+        }
+
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,0,0.5); }
+
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* ===== CUSTOMER SERVICE PAGE ===== */
+        .cs-hero {
+            background: linear-gradient(135deg, #1a3a6b, var(--navy));
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .cs-hero h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .cs-hero p { color: #aac4ff; font-size: 14px; }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 22px;
+            margin: 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .contact-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .contact-card .info h4 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+        .contact-card .info p { color: #666; font-size: 13px; }
+        .contact-card .info a { color: var(--green); font-weight: 700; text-decoration: none; }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            cursor: pointer;
+        }
+
+        .faq-item .q {
+            font-weight: 800;
+            color: var(--navy);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .faq-item .a {
+            color: #555;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .a { display: block; }
+        .faq-arrow { transition: transform 0.2s; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+        .hours-grid {
+            background: var(--white);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row .day { font-weight: 700; color: var(--navy); }
+        .hours-row .time { color: #555; }
+        .hours-row.highlight { background: #fff8e1; }
+        .hours-row.highlight .time { color: var(--orange); font-weight: 700; }
+
+        /* ===== REVIEWS PAGE ===== */
+        .reviews-hero {
+            background: linear-gradient(135deg, var(--orange), #cc5500);
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .reviews-hero h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .stars-big { font-size: 32px; margin-bottom: 6px; }
+
+        .review-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .review-card .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .reviewer .meta h4 { font-weight: 800; font-size: 15px; color: var(--navy); }
+        .reviewer .meta p { font-size: 12px; color: #999; }
+        .review-stars { color: #ffc107; font-size: 16px; margin-bottom: 8px; }
+        .review-text { color: #444; font-size: 14px; line-height: 1.7; }
+
+        /* Write a review */
+        .write-review {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 22px;
+            margin: 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .write-review h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--navy);
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        .star-picker { display: flex; gap: 8px; margin: 8px 0 14px; }
+        .star-picker span {
+            font-size: 32px;
+            cursor: pointer;
+            color: #ddd;
+            transition: color 0.15s, transform 0.15s;
+        }
+        .star-picker span.lit { color: #ffc107; }
+        .star-picker span:hover { transform: scale(1.2); }
+
+        .write-review input, .write-review textarea {
+            width: 100%;
+            padding: 13px 16px;
+            margin: 7px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .write-review input:focus, .write-review textarea:focus { border-color: var(--navy); }
+        .write-review textarea { resize: vertical; min-height: 100px; }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            background: var(--green);
+            color: #fff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.5);
+            z-index: 999;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,211,102,0.6); }
+
+        /* Page-bottom spacing */
+        .page-bottom { height: 80px; }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 28px; }
+            .nav-links button { font-size: 11px; padding: 14px 7px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logo">MORE GRACE</div>
+        <div class="nav-links">
+            <button class="active" onclick="showPage('home', this)">🏠 Home</button>
+            <button onclick="showPage('order', this)">🧺 Order</button>
+            <button onclick="showPage('support', this)">💬 Support</button>
+            <button onclick="showPage('reviews', this)">⭐ Reviews</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ HOME PAGE -->
+<div id="page-home" class="page active">
+
+    <div class="hero">
+        <h1>MORE GRACE LAUNDRY SERVICES</h1>
+        <p class="tagline">Lucas by Eslavida, Abraka, Delta State · 08137760372</p>
+        <div class="badges">
+            <span class="badge">⚡ 24/7 Service</span>
+            <span class="badge">🚗 Pickup & Delivery</span>
+            <span class="badge">✨ Stain Removal</span>
+            <span class="badge">👔 Dry Cleaning</span>
+        </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="section">
+        <div class="section-title">Our Shop & Work</div>
+
+        <div class="media-grid">
+            <!-- Banner image wide -->
+            <div class="media-item wide">
+                <img src="IMG-20260415-WA0011_1_.jpg" alt="More Grace Laundry Services Banner">
+            </div>
+
+            <!-- Work photos -->
+            <div class="media-item">
+                <img src="IMG-20260423-WA0006.jpg" alt="Ironing & folding clothes">
+            </div>
+            <div class="media-item">
+                <img src="IMG-20260423-WA0004.jpg" alt="Packaged laundry">
+            </div>
+            <div class="media-item">
+                <img src="IMG-20260423-WA0003.jpg" alt="Neatly packed clothes">
+            </div>
+            <div class="media-item">
+                <img src="IMG-20260423-WA0005.jpg" alt="Our signage">
+            </div>
+            <div class="media-item wide">
+                <img src="IMG-20260423-WA0001.jpg" alt="More Grace Laundry storefront">
+            </div>
+            <div class="media-item">
+                <img src="IMG-20260423-WA0002.jpg" alt="Our location">
+            </div>
+        </div>
+
+        <!-- Videos -->
+        <div class="section-title" style="margin-top:10px;">See Us In Action</div>
+        <div class="media-grid">
+            <div class="media-item wide" style="position:relative;">
+                <span class="video-label">▶ VIDEO</span>
+                <video controls playsinline>
+                    <source src="VID-20260423-WA0008.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="media-item wide" style="position:relative;">
+                <span class="video-label">▶ VIDEO</span>
+                <video controls playsinline>
+                    <source src="VID-20260423-WA0009.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <div class="services-strip">
+        <h3>What We Offer</h3>
+        <div class="services-list">
+            <div class="service-tag"><span class="icon">👔</span> Dry Cleaning</div>
+            <div class="service-tag"><span class="icon">🔥</span> Ironing</div>
+            <div class="service-tag"><span class="icon">🏠</span> Home Cleaning</div>
+            <div class="service-tag"><span class="icon">🚗</span> Pickup & Delivery</div>
+            <div class="service-tag"><span class="icon">📦</span> Cloth Packaging</div>
+            <div class="service-tag"><span class="icon">🧴</span> Stain Removal</div>
+            <div class="service-tag"><span class="icon">🔌</span> Pay Charge Centre</div>
+            <div class="service-tag"><span class="icon">💧</span> Cold Water & Drinks</div>
+        </div>
+    </div>
+
+    <!-- Prices -->
+    <div class="section" style="padding-top:20px;">
+        <div class="section-title">Our Prices</div>
+        <div class="price-card"><span class="name">👖 Trouser</span><span class="price">₦500</span></div>
+        <div class="price-card"><span class="name">👖 Jeans</span><span class="price">₦500</span></div>
+        <div class="price-card"><span class="name">👕 White T (Long/Short)</span><span class="price">₦400</span></div>
+        <div class="price-card"><span class="name">👕 Polo</span><span class="price">₦400</span></div>
+        <div class="price-card"><span class="name">🧥 Native</span><span class="price">₦1,000</span></div>
+        <div class="price-card"><span class="name">🛏 Duvet Big</span><span class="price">₦4,000</span></div>
+        <div class="price-card"><span class="name">🛏 Duvet Small</span><span class="price">₦3,000</span></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bar">
+        <h3>Ready to place an order?</h3>
+        <div class="btn-group">
+            <button class="btn btn-white" onclick="showPage('order', document.querySelectorAll('.nav-links button')[1])">🧺 Order Now</button>
+            <a href="https://wa.me/2348137760372" target="_blank" class="btn btn-navy" style="text-decoration:none;">💬 WhatsApp Us</a>
+        </div>
+    </div>
+
+    <div class="page-bottom"></div>
+</div>
+
+<!-- ============================================================ ORDER PAGE -->
+<div id="page-order" class="page">
+
+    <div style="background: linear-gradient(135deg, #0a1f44, #1a3a6b); color:#fff; padding: 35px 20px; text-align:center;">
+        <h2 style="font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold); letter-spacing:2px; margin-bottom:6px;">Place Your Order</h2>
+        <p style="color:#aac4ff; font-size:14px;">Select your items below and we'll send the order to WhatsApp</p>
+    </div>
+
+    <div class="section">
+        <div id="orderItems">
+            <div class="order-card">
+                <select class="item-select" onchange="calculateTotal()">
+                    <option value="">Select Item</option>
+                    <option value="500" data-name="Trouser">Trouser - ₦500</option>
+                    <option value="500" data-name="Jeans">Jeans - ₦500</option>
+                    <option value="400" data-name="White T">White T - ₦400</option>
+                    <option value="400" data-name="Polo">Polo - ₦400</option>
+                    <option value="1000" data-name="Native">Native - ₦1,000</option>
+                    <option value="4000" data-name="Duvet Big">Duvet Big - ₦4,000</option>
+                    <option value="3000" data-name="Duvet Small">Duvet Small - ₦3,000</option>
+                </select>
+                <input type="number" class="item-qty" placeholder="Qty" min="1" value="1" onchange="calculateTotal()">
+                <div class="item-total">₦0</div>
+            </div>
+        </div>
+
+        <button type="button" class="add-item-btn" onclick="addItem()">+ Add Another Item</button>
+
+        <div class="pickup-box">
+            <input type="checkbox" id="pickup" onchange="calculateTotal()">
+            <label for="pickup">
+                <strong>Pickup & Delivery Service</strong><br>
+                <small style="color:#777;">We'll come pick up your clothes and deliver them back</small>
+            </label>
+            <div class="pickup-price">₦3,000</div>
+        </div>
+
+        <div class="total-box">
+            <h3>Total Amount</h3>
+            <div class="grand-total" id="grandTotal">₦0</div>
+            <div class="breakdown" id="breakdown">Select items to see breakdown</div>
+        </div>
+
+        <div class="form-box">
+            <h3>Your Details</h3>
+            <input type="text" id="name" placeholder="Your Full Name" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <input type="text" id="address" placeholder="Delivery / Pickup Address" required>
+        </div>
+
+        <button class="submit-btn" onclick="submitOrder(event)">SUBMIT ORDER VIA WHATSAPP</button>
+        <div class="success-msg" id="successMsg">✅ Order submitted! Opening WhatsApp...</div>
+    </div>
+
+    <div class="page-bottom"></div>
+</div>
+
+<!-- ============================================================ SUPPORT PAGE -->
+<div id="page-support" class="page">
+
+    <div class="cs-hero">
+        <h2>CUSTOMER SERVICE</h2>
+        <p>We're here to help — reach us anytime!</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Contact Us</div>
+
+        <div class="contact-card">
+            <div class="contact-icon" style="background:#e8f5e9;">💬</div>
+            <div class="info">
+                <h4>WhatsApp (Fastest)</h4>
+                <p>Chat with us directly</p>
+                <a href="https://wa.me/2348137760372" target="_blank">+234 813 776 0372 →</a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon" style="background:#e3f2fd;">📞</div>
+            <div class="info">
+                <h4>Call Us</h4>
+                <p>Talk to us directly</p>
+                <a href="tel:+2348137760372" style="color:var(--navy);">+234 813 776 0372</a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon" style="background:#fff3e0;">📍</div>
+            <div class="info">
+                <h4>Our Location</h4>
+                <p>Lucas by Eslavida, Abraka, Delta State</p>
+            </div>
+        </div>
+
+        <!-- Hours -->
+        <div class="section-title" style="margin-top:20px;">Opening Hours</div>
+        <div class="hours-grid">
+            <div class="hours-row"><span class="day">Monday</span><span class="time">7:00 AM – 9:00 PM</span></div>
+            <div class="hours-row"><span class="day">Tuesday</span><span class="time">7:00 AM – 9:00 PM</span></div>
+            <div class="hours-row"><span class="day">Wednesday</span><span class="time">7:00 AM – 9:00 PM</span></div>
+            <div class="hours-row"><span class="day">Thursday</span><span class="time">7:00 AM – 9:00 PM</span></div>
+            <div class="hours-row"><span class="day">Friday</span><span class="time">7:00 AM – 9:00 PM</span></div>
+            <div class="hours-row"><span class="day">Saturday</span><span class="time">7:00 AM – 9:00 PM</span></div>
+            <div class="hours-row highlight"><span class="day">Sunday</span><span class="time">24/7 Service ⚡</span></div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section-title" style="margin-top:20px;">Frequently Asked Questions</div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q">How long does laundry take? <span class="faq-arrow">▼</span></div>
+            <div class="a">Most laundry is ready within 24 hours. For bulkier items like duvets, it may take up to 48 hours. We'll let you know when your clothes are ready!</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q">How does pickup & delivery work? <span class="faq-arrow">▼</span></div>
+            <div class="a">For ₦3,000, we'll come to your location to pick up your clothes and bring them back clean and neatly packaged. Just provide your address when ordering.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q">How do I pay? <span class="faq-arrow">▼</span></div>
+            <div class="a">Payment can be made on delivery or via bank transfer. We accept cash and POS payments at our shop. You can also use our Pay Charge Centre.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q">Do you handle stain removal? <span class="faq-arrow">▼</span></div>
+            <div class="a">Yes! We offer professional stain removal as part of our service. Contact us first via WhatsApp if you have stubborn stains so we can advise you.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q">Can I drop off clothes at any time? <span class="faq-arrow">▼</span></div>
+            <div class="a">We are available 24/7. Feel free to WhatsApp us at any time to arrange a drop-off or pickup, even outside regular hours.</div>
+        </div>
+
+        <a href="https://wa.me/2348137760372" target="_blank" style="display:block; text-decoration:none; margin-top:20px;">
+            <button class="btn btn-green btn-full" style="border-radius:10px; padding:16px; font-size:16px;">💬 Message Us on WhatsApp</button>
+        </a>
+    </div>
+
+    <div class="page-bottom"></div>
+</div>
+
+<!-- ============================================================ REVIEWS PAGE -->
+<div id="page-reviews" class="page">
+
+    <div class="reviews-hero">
+        <h2>CUSTOMER REVIEWS</h2>
+        <div class="stars-big">⭐⭐⭐⭐⭐</div>
+        <p style="color:rgba(255,255,255,0.85); font-size:14px;">What our customers are saying</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Recent Reviews</div>
+
+        <div id="reviewsList">
+            <!-- Sample reviews -->
+            <div class="review-card">
+                <div class="reviewer">
+                    <div class="avatar">CH</div>
+                    <div class="meta"><h4>Chioma H.</h4><p>2 days ago</p></div>
+                </div>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Excellent service! My clothes came back looking brand new. The packaging was so neat and everything smelled fresh. Will definitely be using More Grace Laundry again!</p>
+            </div>
+
+            <div class="review-card">
+                <div class="reviewer">
+                    <div class="avatar" style="background:var(--orange);">EM</div>
+                    <div class="meta"><h4>Emmanuel M.</h4><p>1 week ago</p></div>
+                </div>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">The pickup and delivery service is so convenient. They came right on time and my clothes were delivered perfectly ironed. Very professional.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="reviewer">
+                    <div class="avatar" style="background:#2e7d32;">FO</div>
+                    <div class="meta"><h4>Favour O.</h4><p>2 weeks ago</p></div>
+                </div>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Best laundry in Abraka! My native wear was handled with so much care. No damage, no fading. The prices are also very affordable. Highly recommended!</p>
+            </div>
+        </div>
+
+        <!-- Write a review -->
+        <div class="section-title" style="margin-top:20px;">Write a Review</div>
+        <div class="write-review">
+            <h3>Share Your Experience</h3>
+            <label style="font-size:13px; font-weight:700; color:#555;">Your Rating</label>
+            <div class="star-picker" id="starPicker">
+                <span onclick="setRating(1)">★</span>
+                <span onclick="setRating(2)">★</span>
+                <span onclick="setRating(3)">★</span>
+                <span onclick="setRating(4)">★</span>
+                <span onclick="setRating(5)">★</span>
+            </div>
+            <input type="text" id="reviewName" placeholder="Your Name">
+            <textarea id="reviewText" placeholder="Tell us about your experience..."></textarea>
+            <button class="submit-btn" onclick="submitReview()" style="font-size:18px; padding:14px;">POST REVIEW</button>
+            <div class="success-msg" id="reviewSuccess">🎉 Thank you for your review!</div>
+        </div>
+    </div>
+
+    <div class="page-bottom"></div>
+</div>
+
+<!-- Floating WhatsApp -->
+<a class="whatsapp-float" href="https://wa.me/2348137760372" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<script>
+    const WHATSAPP = "2348137760372";
+    const DELIVERY_FEE = 3000;
+    let selectedRating = 0;
+
+    /* ---- PAGE NAVIGATION ---- */
+    function showPage(id, btn) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+        document.getElementById('page-' + id).classList.add('active');
+        if (btn) btn.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    /* ---- ORDER FUNCTIONS ---- */
+    function getSelectHTML() {
+        return `<select class="item-select" onchange="calculateTotal()">
+            <option value="">Select Item</option>
+            <option value="500" data-name="Trouser">Trouser - ₦500</option>
+            <option value="500" data-name="Jeans">Jeans - ₦500</option>
+            <option value="400" data-name="White T">White T - ₦400</option>
+            <option value="400" data-name="Polo">Polo - ₦400</option>
+            <option value="1000" data-name="Native">Native - ₦1,000</option>
+            <option value="4000" data-name="Duvet Big">Duvet Big - ₦4,000</option>
+            <option value="3000" data-name="Duvet Small">Duvet Small - ₦3,000</option>
+        </select>`;
+    }
+
+    function addItem() {
+        const c = document.getElementById('orderItems');
+        const d = document.createElement('div');
+        d.className = 'order-card';
+        d.innerHTML = `${getSelectHTML()}
+            <input type="number" class="item-qty" placeholder="Qty" min="1" value="1" onchange="calculateTotal()">
+            <div class="item-total">₦0</div>
+            <button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>`;
+        c.appendChild(d);
+    }
+
+    function removeItem(btn) { btn.parentElement.remove(); calculateTotal(); }
+
+    function calculateTotal() {
+        const items = document.querySelectorAll('.order-item, .order-card');
+        let subtotal = 0;
+        let lines = [];
+        items.forEach(item => {
+            const sel = item.querySelector('.item-select');
+            const qty = item.querySelector('.item-qty');
+            const tot = item.querySelector('.item-total');
+            if (sel && sel.value && qty && qty.value) {
+                const p = parseInt(sel.value);
+                const q = parseInt(qty.value);
+                const t = p * q;
+                const n = sel.options[sel.selectedIndex].getAttribute('data-name');
+                subtotal += t;
+                if (tot) tot.textContent = '₦' + t.toLocaleString();
+                lines.push(`${n} x${q} = ₦${t.toLocaleString()}`);
+            } else if (tot) tot.textContent = '₦0';
+        });
+        const pickup = document.getElementById('pickup');
+        const fee = (pickup && pickup.checked) ? DELIVERY_FEE : 0;
+        const grand = subtotal + fee;
+        document.getElementById('grandTotal').textContent = '₦' + grand.toLocaleString();
+        let bd = lines.join(' + ');
+        if (fee) bd += ' + Delivery ₦3,000';
+        document.getElementById('breakdown').textContent = bd || 'Select items to see breakdown';
+    }
+
+    function submitOrder(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        if (!name || !phone || !address) { alert("Please fill in all your details!"); return; }
+
+        const items = [];
+        let subtotal = 0;
+        document.querySelectorAll('.order-card').forEach(item => {
+            const sel = item.querySelector('.item-select');
+            const qty = item.querySelector('.item-qty');
+            if (sel && sel.value && qty && qty.value) {
+                const p = parseInt(sel.value), q = parseInt(qty.value);
+                const n = sel.options[sel.selectedIndex].getAttribute('data-name');
+                items.push({ name: n, price: p, quantity: q, total: p * q });
+                subtotal += p * q;
+            }
+        });
+        if (items.length === 0) { alert("Please select at least one item!"); return; }
+
+        const pickup = document.getElementById('pickup').checked;
+        const fee = pickup ? DELIVERY_FEE : 0;
+        const grand = subtotal + fee;
+
+        let msg = `*NEW LAUNDRY ORDER*%0A%0A`;
+        msg += `*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}%0A%0A*Items:*%0A`;
+        items.forEach((i, idx) => { msg += `${idx+1}. ${i.name} x${i.quantity} = ₦${i.total.toLocaleString()}%0A`; });
+        msg += `%0A*Subtotal:* ₦${subtotal.toLocaleString()}%0A`;
+        if (pickup) msg += `*Delivery:* ₦${DELIVERY_FEE.toLocaleString()}%0A`;
+        msg += `%0A*TOTAL:* ₦${grand.toLocaleString()}%0A_Ordered: ${new Date().toLocaleString()}_`;
+
+        window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
+        document.getElementById('successMsg').style.display = 'block';
+        setTimeout(() => { document.getElementById('successMsg').style.display = 'none'; }, 4000);
+    }
+
+    /* ---- FAQ ---- */
+    function toggleFaq(el) { el.classList.toggle('open'); }
+
+    /* ---- REVIEWS ---- */
+    function setRating(n) {
+        selectedRating = n;
+        document.querySelectorAll('#starPicker span').forEach((s, i) => {
+            s.classList.toggle('lit', i < n);
+        });
+    }
+
+    function submitReview() {
+        const name = document.getElementById('reviewName').value.trim();
+        const text = document.getElementById('reviewText').value.trim();
+        if (!name || !text) { alert("Please enter your name and review!"); return; }
+        if (!selectedRating) { alert("Please select a star rating!"); return; }
+
+        const stars = '⭐'.repeat(selectedRating);
+        const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        const colors = ['#0a1f44','#ff6b00','#2e7d32','#c62828','#1565c0'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+            <div class="reviewer">
+                <div class="avatar" style="background:${color};">${initials}</div>
+                <div class="meta"><h4>${name}</h4><p>Just now</p></div>
+            </div>
+            <div class="review-stars">${stars}</div>
+            <p class="review-text">${text}</p>`;
+
+        document.getElementById('reviewsList').prepend(card);
+        document.getElementById('reviewName').value = '';
+        document.getElementById('reviewText').value = '';
+        selectedRating = 0;
+        setRating(0);
+        document.getElementById('reviewSuccess').style.display = 'block';
+        setTimeout(() => { document.getElementById('reviewSuccess').style.display = 'none'; }, 4000);
+    }
+
+    calculateTotal();
+</script>
+</body>
+</html>
